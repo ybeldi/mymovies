@@ -3,7 +3,6 @@ package com.cic.formation.mymovies.data
 
 import com.cic.formation.mymovies.data.api.APIService
 import com.cic.formation.mymovies.data.api.json.Movies
-import com.cic.formation.mymovies.data.api.json.SectionDetailsResponse
 import com.cic.formation.mymovies.data.utils.Results
 import com.cic.formation.mymovies.data.utils.handleResponse
 import kotlinx.coroutines.flow.Flow

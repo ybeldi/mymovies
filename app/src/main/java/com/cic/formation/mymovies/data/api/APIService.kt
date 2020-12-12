@@ -1,7 +1,6 @@
 package com.cic.formation.mymovies.data.api
 
 import com.cic.formation.mymovies.BuildConfig
-import com.cic.formation.mymovies.data.api.json.SectionDetailsResponse
 import com.cic.formation.mymovies.data.api.json.JsonResponse
 import com.cic.formation.mymovies.data.api.json.Movies
 import retrofit2.Response
@@ -18,6 +17,6 @@ interface APIService {
     @GET("3/discover/movie?api_key=${BuildConfig.TMDB_API_KEY}&vote_count.gte=500&language=en&sort_by=release_date.desc/")
     suspend fun getMovies(): Response<JsonResponse>
 
-    @GET("androiddash-se/{id}")
+    @GET("3/discover/movie/{id}?api_key=${BuildConfig.TMDB_API_KEY}")
     suspend fun getMoviesById(@Path("id") id: Int): Response<Movies>
 }
