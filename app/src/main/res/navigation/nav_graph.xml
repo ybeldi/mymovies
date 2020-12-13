@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/moviesListFragment"
         android:name="com.cic.formation.mymovies.ui.list.MoviesListFragment"
-        android:label="movies_list_fragment"
+        android:label="@string/title_movies_list"
         tools:layout="@layout/fragment_movies_list">
         <action
             android:id="@+id/list_to_detail"
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/movieDetailsFragment"
         android:name="com.cic.formation.mymovies.ui.details.MovieDetailsFragment"
-        android:label="details_section_fragment"
+        android:label="@string/title_movie_details"
         tools:layout="@layout/fragment_movie_details">
         <argument
             android:name="movieId"
