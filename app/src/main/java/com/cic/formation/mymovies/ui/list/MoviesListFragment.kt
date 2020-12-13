@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.cic.formation.mymovies.R
 import com.cic.formation.mymovies.data.utils.Results
@@ -30,13 +28,12 @@ class MoviesListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val moviesAdapter = MoviesAdapter(emptyList()) {
-            findNavController().navigate(
-                R.id.list_to_detail,
-                bundleOf("movieId" to it.id)
-            )
+            // Navigate using the direction class and safe args
+            val direction = MoviesListFragmentDirections.listToDetail(movieId = it.id)
+            findNavController().navigate(direction)
         }
         moviesRecyclerView.adapter = moviesAdapter
-        moviesViewModel.showMovies.observe(viewLifecycleOwner, Observer { result ->
+        moviesViewModel.showMovies.observe(viewLifecycleOwner, { result ->
             when (result) {
                 is Results.Loading -> {
                     stateTextView.visibility = View.VISIBLE

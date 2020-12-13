@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import com.cic.formation.mymovies.R
 import com.cic.formation.mymovies.data.api.json.Movies
 import com.cic.formation.mymovies.data.utils.Results
@@ -14,14 +14,12 @@ import com.cic.formation.mymovies.utils.loadImage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_movie_details.*
 
-const val ARG_SELECTED_MOVIE = "ARG_SELECTED_MOVIE"
-
 @AndroidEntryPoint
 class MovieDetailsFragment : Fragment() {
 
     lateinit var movie: Movies
-
     private val viewModel: MovieDetailsViewModel by viewModels()
+    private val args: MovieDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,17 +31,15 @@ class MovieDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val movieId = arguments?.getInt("movieId")
-        viewModel.getMovieById(movieId!!)
-
-        viewModel.showSectionDetails.observe(viewLifecycleOwner, Observer { result ->
+        viewModel.getMovieById(args.movieId)
+        viewModel.showSectionDetails.observe(viewLifecycleOwner, { result ->
             when (result) {
                 is Results.Loading -> {
 
                 }
                 is Results.Success -> {
                     movie = result.data
-                    imagePoster.loadImage(movie!!.poster_path)
+                    imagePoster.loadImage(movie.poster_path)
                     //title.text = movie.title
                     movieTitle.text = movie.title
                     releaseDate.text = getString(R.string.release_date, movie.release_date)
