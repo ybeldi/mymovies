@@ -8,9 +8,11 @@ import androidx.lifecycle.viewModelScope
 import com.cic.formation.mymovies.data.api.json.Movies
 import com.cic.formation.mymovies.data.utils.Results
 import com.cic.formation.mymovies.domain.GetMovieDetailsUseCase
+import dagger.hilt.android.scopes.FragmentScoped
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+@FragmentScoped
 class MovieDetailsViewModel @ViewModelInject constructor(
     private val getSectionDetailsUseCase: GetMovieDetailsUseCase
 ) : ViewModel() {
